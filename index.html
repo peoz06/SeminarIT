@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Registrasi dengan Validasi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <img src="seminar.jpg" alt="Seminar Teknologi Informasi Nasional">
+        <h1>Seminar Teknologi Informasi Nasional</h1>
+    </header>
+    
+    <div class="container">
+        <h2><strong>Form Pendaftaran</strong></h2>
+        <form id="registrationForm">
+            <div class="input-box">
+                <label>Nama Lengkap</label>
+                <input type="text" id="fullName" placeholder="Masukkan Nama Lengkap Anda" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="input-box">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="Masukkan Email Anda" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Masukkan Password Anda" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="input-box">
+                <label>Konfirmasi Password</label>
+                <input type="password" id="confirmPassword" placeholder="Masukkan Konfirmasi Password" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="input-box">
+                <label>Tanggal Lahir</label>
+                <input type="date" id="birthdate" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="input-box">
+                <label>Nomor HP</label>
+                <input type="tel" id="phoneNumber" placeholder="Masukkan Nomor HP Anda" required>
+                <small class="error-message"></small>
+            </div>
+            <div class="input-box">
+                <button type="submit">Daftar</button>
+            </div>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
