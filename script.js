@@ -1,62 +1,46 @@
 $(document).ready(function () {
+    function validateForm() {
+        let isValid = true;
+
+        $(".input-box input").each(function () {
+            if ($(this).val().trim() === "") {
+                isValid = false;
+            }
+        });
+
+        $("#submitBtn").prop("disabled", !isValid);
+    }
+
+    $(".input-box input").on("keyup change", function () {
+        validateForm();
+    });
+
     $("#registrationForm").submit(function (event) {
         event.preventDefault();
         let isValid = true;
 
         const fullName = $("#fullName");
-        if (fullName.val().length < 3) {
-            showError(fullName, "Nama minimal 3 karakter.");
-            isValid = false;
-        } else {
-            clearError(fullName);
-        }
+        fullName.val().length < 3 ? showError(fullName, "Nama minimal 3 karakter.") : clearError(fullName);
 
         const email = $("#email");
-        const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-        if (!emailPattern.test(email.val())) {
-            showError(email, "Email tidak valid.");
-            isValid = false;
-        } else {
-            clearError(email);
-        }
+        /^[^ ]+@[^ ]+\.[a-z]{2,3}$/.test(email.val()) ? clearError(email) : showError(email, "Email tidak valid.");
 
         const password = $("#password");
-        if (password.val().length < 8) {
-            showError(password, "Password minimal 8 karakter.");
-            isValid = false;
-        } else {
-            clearError(password);
-        }
+        password.val().length < 8 ? showError(password, "Password minimal 8 karakter.") : clearError(password);
 
         const confirmPassword = $("#confirmPassword");
-        if (confirmPassword.val() !== password.val()) {
-            showError(confirmPassword, "Password tidak cocok.");
-            isValid = false;
-        } else {
-            clearError(confirmPassword);
-        }
+        confirmPassword.val() !== password.val() ? showError(confirmPassword, "Password tidak cocok.") : clearError(confirmPassword);
 
         const birthdate = $("#birthdate");
-        const birthYear = new Date(birthdate.val()).getFullYear();
-        if (birthYear > 2006) {
-            showError(birthdate, "Anda harus lahir sebelum tahun 2006.");
-            isValid = false;
-        } else {
-            clearError(birthdate);
-        }
+        new Date(birthdate.val()).getFullYear() > 2006 ? showError(birthdate, "Anda harus lahir sebelum tahun 2006.") : clearError(birthdate);
 
         const phoneNumber = $("#phoneNumber");
-        const phonePattern = /^(?:\+62|08)[0-9]{8,13}$/;
-        if (!phonePattern.test(phoneNumber.val())) {
-            showError(phoneNumber, "Nomor HP harus dalam format Indonesia.");
-            isValid = false;
-        } else {
-            clearError(phoneNumber);
-        }
+        /^(?:\+62|08)[0-9]{8,13}$/.test(phoneNumber.val()) ? clearError(phoneNumber) : showError(phoneNumber, "Nomor HP harus dalam format Indonesia.");
 
         if (isValid) {
             alert("Pendaftaran berhasil!");
             $("#registrationForm")[0].reset();
+            validateForm();
         }
     });
 
@@ -67,4 +51,6 @@ $(document).ready(function () {
     function clearError(input) {
         input.next(".error-message").text("");
     }
+
+    validateForm();
 });
